@@ -1,0 +1,3 @@
+# Mantém finais de linha LF nos scripts, mesmo em clones no Windows
+* text=auto eol=lf
+*.png binary
