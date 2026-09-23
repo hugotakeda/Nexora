@@ -1,0 +1,30 @@
+{
+  "name": "nexora-erp",
+  "version": "2.0.0",
+  "description": "NEXORA — ERP modular com Field Service, construído como Linha de Produto de Software (PUCPR)",
+  "private": true,
+  "main": "dist/api/servidor.js",
+  "engines": {
+    "node": ">=20.12"
+  },
+  "scripts": {
+    "build": "tsc",
+    "verificar": "tsc --noEmit",
+    "start": "tsc && node dist/api/servidor.js",
+    "demo": "tsc && node dist/Aplicacao.js",
+    "testar": "node testes/testar-api.mjs",
+    "banco:subir": "docker compose up -d",
+    "banco:parar": "docker compose down",
+    "banco:resetar": "docker compose down -v && docker compose up -d",
+    "banco:logs": "docker compose logs -f mysql"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "mysql2": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.20.3",
+    "typescript": "^5.9.3"
+  }
+}
