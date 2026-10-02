@@ -10,3 +10,6 @@ build/
 pacote/dist/
 *.blob
 *.tgz
+
+# Distribuição gerada
+distribuicao/

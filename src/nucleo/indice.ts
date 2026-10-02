@@ -39,3 +39,5 @@ export type { ErroTraduzido } from "./errosBanco";
 
 // Tipos reutilizáveis
 export type { TipoCampo, CampoModulo, ModuloCrud, Registro } from "./tipos";
+
+export { RAIZ, PASTA_PUBLIC } from "./caminhos";

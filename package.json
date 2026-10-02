@@ -16,7 +16,16 @@
     "banco:subir": "docker compose up -d",
     "banco:parar": "docker compose down",
     "banco:resetar": "docker compose down -v && docker compose up -d",
-    "banco:logs": "docker compose logs -f mysql"
+    "banco:logs": "docker compose logs -f mysql",
+    "nucleo:compilar": "tsc -p tsconfig.nucleo.json",
+    "nucleo:empacotar": "cd pacote && npm pack",
+    "pacote": "npm run nucleo:compilar && npm run nucleo:empacotar",
+    "compactar": "node build.mjs",
+    "sea:blob": "node --experimental-sea-config sea-config.json",
+    "sea:binario": "node -e \"require('fs').copyFileSync(process.execPath,'build/nexora.exe')\"",
+    "sea:injetar": "postject build/nexora.exe NODE_SEA_BLOB build/nexora.blob --sentinel-fuse NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2",
+    "empacotar": "npm run compactar && npm run sea:blob && npm run sea:binario && npm run sea:injetar",
+    "entregar": "npm run pacote && npm run empacotar"
   },
   "dependencies": {
     "express": "^5.2.1",
@@ -25,6 +34,8 @@
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^22.20.3",
+    "esbuild": "^0.28.2",
+    "postject": "^1.0.0-alpha.6",
     "typescript": "^5.9.3"
   }
 }
