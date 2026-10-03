@@ -1,28 +1,28 @@
-# NEXORA — ERP modular com Field Service
+<div align="center">
+  <h1>NEXORA</h1>
+  <p><strong>ERP modular com Field Service para pequenas e médias empresas.</strong></p>
 
-![versão](https://img.shields.io/badge/vers%C3%A3o-2.0-0B5FD7) ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-06265F) ![Node](https://img.shields.io/badge/Node.js-24_LTS-06265F) ![MySQL](https://img.shields.io/badge/MySQL-8-06265F)
+  <p>
+    <img src="https://img.shields.io/badge/versão-2.0-0B5FD7?style=flat-square" />
+    <img src="https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript&logoColor=white" />
+    <img src="https://img.shields.io/badge/Node.js-24_LTS-339933?style=flat-square&logo=node.js&logoColor=white" />
+    <img src="https://img.shields.io/badge/MySQL-8-4479A1?style=flat-square&logo=mysql&logoColor=white" />
+    <img src="https://img.shields.io/badge/Docker-compose-2496ED?style=flat-square&logo=docker&logoColor=white" />
+    <img src="https://img.shields.io/badge/licença-MIT-blue?style=flat-square" />
+  </p>
 
-PUCPR · Engenharia de Software · Desenvolvimento Orientado a Reúso de Software · Prof. Tiago Navarro
-
-O NEXORA é um ERP vertical para pequenas e médias empresas prestadoras de serviços (assistência técnica, refrigeração, elétrica, TI, manutenção). O projeto é construído como uma **Linha de Produto de Software (LPS)**: um núcleo comum e pontos de variação que geram quatro produtos diferentes a partir do mesmo código.
-
----
-
-## Índice
-
-1. [O que está entregue](#1-o-que-está-entregue)
-2. [Como iniciar o projeto](#2-como-iniciar-o-projeto)
-3. [As telas do sistema](#3-as-telas-do-sistema)
-4. [Divisão entre os integrantes](#4-divisão-entre-os-integrantes)
-5. [Banco de dados](#5-banco-de-dados)
-6. [Como a variabilidade foi planejada](#6-como-a-variabilidade-foi-planejada)
-7. [Padrões de projeto (entrega anterior)](#7-padrões-de-projeto-entrega-anterior)
-8. [Estrutura de pastas](#8-estrutura-de-pastas)
-9. [Problemas comuns](#9-problemas-comuns)
+  <p><em>PUCPR · Engenharia de Software · Desenvolvimento Orientado a Reúso de Software · Prof. Tiago Navarro</em></p>
+</div>
 
 ---
 
-## 1. O que está entregue
+## 📋 Sobre
+
+O **NEXORA** é um ERP vertical para pequenas e médias empresas prestadoras de serviços (assistência técnica, refrigeração, elétrica, TI, manutenção). O projeto é construído como uma **Linha de Produto de Software (LPS)**: um núcleo comum e pontos de variação que geram quatro produtos diferentes a partir do mesmo código.
+
+---
+
+## 📦 O que está entregue
 
 | Requisito do enunciado | Onde está |
 |---|---|
@@ -35,11 +35,11 @@ O NEXORA é um ERP vertical para pequenas e médias empresas prestadoras de serv
 
 ---
 
-## 2. Como iniciar o projeto
+## 🚀 Como iniciar o projeto
 
 > **Primeira vez nesta máquina?** Siga o [**Guia de instalação**](docs/GUIA-DE-INSTALACAO.md): ele cobre Node.js, Docker Desktop, VS Code, WSL e os erros mais comuns no Windows.
 
-Com Node.js 20.12+ (recomendado 24 LTS) e Docker Desktop já instalados:
+Com **Node.js 20.12+** (recomendado 24 LTS) e **Docker Desktop** já instalados:
 
 ```bash
 npm install            # dependências (ou "npm ci" para usar exatamente o package-lock)
@@ -48,7 +48,7 @@ npm start              # compila e sobe em http://localhost:3000
 npm run testar         # em outro terminal: tem que dar 66/66
 ```
 
-### Outros comandos
+### ⚙️ Outros comandos
 
 | Comando | O que faz |
 |---|---|
@@ -62,7 +62,7 @@ npm run testar         # em outro terminal: tem que dar 66/66
 | `npm run banco:resetar` | Apaga os dados e recria o banco do zero a partir do `schema.sql` |
 | `npm run banco:logs` | Mostra o log do MySQL (útil quando o banco não sobe) |
 
-### Configuração
+### 🔐 Configuração
 
 As credenciais vêm de variáveis de ambiente ou de um arquivo `.env` na raiz (lido automaticamente ao iniciar). Com Docker, os padrões já funcionam; para mudar, copie `.env.example` para `.env` e ajuste:
 
@@ -82,62 +82,56 @@ Para ver a mesma aplicação como outra empresa (produto NEXORA Core, só o núc
 $env:EMPRESA_ID="EMP-2"; npm start
 ```
 
-No Windows (PowerShell), para rodar com outra senha:
-
-```powershell
-$env:DB_PASSWORD="sua_senha"; npm start
-```
-
 ---
 
-## 3. As telas do sistema
+## 🖥️ As telas do sistema
 
-Todas as telas têm o mesmo comportamento: formulário de cadastro no topo, busca no cabeçalho e tabela com editar e excluir. Editar traz o registro de volta para o formulário; excluir pede confirmação.
+> Todas as telas têm o mesmo comportamento: formulário de cadastro no topo, busca no cabeçalho e tabela com editar e excluir. Editar traz o registro de volta para o formulário; excluir pede confirmação.
 
-### Clientes
+### 👥 Clientes
 Empresas e pessoas atendidas. Valida CPF ou CNPJ e e-mail. A busca varre nome, documento e e-mail.
 **Campos:** nome, CPF/CNPJ, e-mail, telefone, endereço.
 
-### Serviços
+### 🔧 Serviços
 Catálogo do que a empresa vende, com preço de tabela, valor da hora e duração estimada. A especialidade escolhida aqui é a mesma exigida do técnico na hora de atender.
 **Campos:** serviço, especialidade exigida, preço de tabela, valor da hora, duração.
 
-### Orçamentos
+### 📄 Orçamentos
 Propostas enviadas ao cliente. O campo "forma de precificação" corresponde às estratégias do padrão Strategy (preço fixo, por hora, por visita).
 **Campos:** cliente, descrição, forma de precificação, valor total, validade, situação.
 **Regra:** orçamento aprovado precisa de valor maior que zero.
 
-### Ordens de serviço
+### 📋 Ordens de serviço
 Atendimentos em aberto, em execução e concluídos, ligando cliente, serviço e técnico.
 **Campos:** descrição, cliente, serviço, técnico, situação, local.
 **Regra:** não dá para agendar, executar ou concluir uma OS sem técnico responsável.
 
-### Técnicos
+### 👷 Técnicos
 Equipe de campo, com especialidade e quantas ordens cada um aguenta em paralelo.
 **Campos:** nome, especialidade, telefone, OS simultâneas, disponível.
 
-### Agenda
+### 📅 Agenda
 Horários reservados na agenda de cada técnico, ligados a uma ordem de serviço.
 **Campos:** ordem de serviço, técnico, início, duração, confirmado, observação.
 **Regra:** um agendamento não passa de 12 horas.
 
-### Estoque
+### 📦 Estoque
 Peças e materiais. Quando a quantidade fica abaixo do mínimo, a linha aparece destacada na tabela.
 **Campos:** SKU, descrição, quantidade, estoque mínimo, custo unitário.
 
-### Financeiro
+### 💰 Financeiro
 Contas a receber e a pagar, com vencimento e situação.
 **Campos:** descrição, tipo, valor, vencimento, situação, forma de pagamento.
 **Regra:** ao marcar como pago, a forma de pagamento é obrigatória.
 
-### Linha de produto (tela de apoio)
+### 🔀 Linha de produto (tela de apoio)
 Não é um CRUD: é a demonstração da variabilidade. Mostra os quatro produtos, quais telas cada um entrega, e permite ligar ou desligar as features opcionais. O menu muda na hora.
 
 ---
 
-## 4. Divisão entre os integrantes
+## 👨‍💻 Divisão entre os integrantes
 
-Cada integrante é dono de dois módulos. O arquivo do módulo declara os campos, as validações e as regras da tela; o núcleo cuida do resto.
+> Cada integrante é dono de dois módulos. O arquivo do módulo declara os campos, as validações e as regras da tela; o núcleo cuida do resto.
 
 | Integrante | Telas | Arquivos |
 |---|---|---|
@@ -145,8 +139,6 @@ Cada integrante é dono de dois módulos. O arquivo do módulo declara os campos
 | Integrante 2 | Técnicos, Agenda | `src/modulos/tecnicos/`, `src/modulos/agendamentos/` |
 | Integrante 3 | Orçamentos, Ordens de serviço | `src/modulos/orcamentos/`, `src/modulos/ordens-servico/` |
 | Integrante 4 | Estoque, Financeiro | `src/modulos/estoque/`, `src/modulos/financeiro/` |
-
-Troquem "Integrante N" pelos nomes de vocês em dois lugares: nesta tabela e no campo `responsavel` de cada módulo, que aparece no canto da tela.
 
 ### Como criar ou alterar uma tela
 
@@ -178,9 +170,9 @@ Tipos de campo disponíveis: `texto`, `textolongo`, `email`, `telefone`, `numero
 
 ---
 
-## 5. Banco de dados
+## 🗄️ Banco de dados
 
-11 tabelas em `banco/schema.sql`, todas InnoDB com chaves estrangeiras. Diagrama e decisões de modelagem em [`banco/MODELO.md`](banco/MODELO.md); consultas prontas para mostrar na apresentação em [`banco/consultas-demo.sql`](banco/consultas-demo.sql).
+> 11 tabelas em `banco/schema.sql`, todas InnoDB com chaves estrangeiras. Diagrama e decisões de modelagem em [`banco/MODELO.md`](banco/MODELO.md); consultas prontas para mostrar na apresentação em [`banco/consultas-demo.sql`](banco/consultas-demo.sql).
 
 | Tabela | Para que serve |
 |---|---|
@@ -198,7 +190,7 @@ Tipos de campo disponíveis: `texto`, `textolongo`, `email`, `telefone`, `numero
 
 Dados de demonstração: duas empresas. **EMP-1** (ClimaTec, NEXORA Field) tem registros em todas as telas; **EMP-2** (Ártico, NEXORA Core) tem só o núcleo, para mostrar multiempresa e variabilidade.
 
-Garantias do banco e do núcleo:
+**Garantias do banco e do núcleo:**
 
 - Todos os comandos usam parâmetros (`?`), o que evita SQL injection.
 - Os ids são gerados no servidor, nunca vêm da tela.
@@ -207,9 +199,9 @@ Garantias do banco e do núcleo:
 
 ---
 
-## 6. Como a variabilidade foi planejada
+## 🔀 Como a variabilidade foi planejada
 
-O NEXORA tem um **núcleo obrigatório**, presente em qualquer produto, e **pontos de variação** que mudam de cliente para cliente.
+> O NEXORA tem um **núcleo obrigatório**, presente em qualquer produto, e **pontos de variação** que mudam de cliente para cliente.
 
 ```
                     NEXORA (núcleo)
@@ -240,21 +232,19 @@ A ligação é **em tempo de execução**, não de compilação: o mesmo binári
 
 ---
 
-## 7. Padrões de projeto (entrega anterior)
+## 🧩 Padrões de projeto
 
-Os três padrões continuam no projeto e conversam com o sistema web:
+> Os três padrões continuam no projeto e conversam com o sistema web. Rode `npm run demo` para ver os três funcionando no console, sem precisar de banco.
 
 | Padrão | Exemplos | Pasta |
 |---|---|---|
-| Singleton | `ConexaoBanco` (pool MySQL usado por todo o sistema), `RegistroFeatures` | `src/nucleo/` |
-| Template Method | `FinalizacaoOS`, `GeradorRelatorio`, `ImportadorDados` | `src/padroes/template-method/` |
-| Strategy | `CalculoPrecoServico`, `DistribuicaoTecnico`, `FormaPagamento` | `src/padroes/strategy/` |
-
-Rode `npm run demo` para ver os três padrões funcionando no console, sem precisar de banco.
+| **Singleton** | `ConexaoBanco` (pool MySQL usado por todo o sistema), `RegistroFeatures` | `src/nucleo/` |
+| **Template Method** | `FinalizacaoOS`, `GeradorRelatorio`, `ImportadorDados` | `src/padroes/template-method/` |
+| **Strategy** | `CalculoPrecoServico`, `DistribuicaoTecnico`, `FormaPagamento` | `src/padroes/strategy/` |
 
 ---
 
-## 8. Estrutura de pastas
+## 📁 Estrutura de pastas
 
 ```
 nexora-erp/
@@ -293,13 +283,12 @@ nexora-erp/
 ├── testes/testar-api.mjs          teste automático das 8 telas
 ├── docker-compose.yml             MySQL 8 + Adminer
 ├── .env.example                   modelo de configuração
-├── CHECKLIST.md                   o que está pronto e o que falta
-└── CLAUDE.md                      contexto para assistentes de IA
+└── tsconfig.json                  configuração do TypeScript
 ```
 
 ---
 
-## 9. Problemas comuns
+## ⚠️ Problemas comuns
 
 **`ECONNREFUSED 127.0.0.1:3306`** — o MySQL não está rodando, ou está em outra porta. Abra o Docker Desktop, rode `npm run banco:subir` e espere uns 20 segundos.
 
