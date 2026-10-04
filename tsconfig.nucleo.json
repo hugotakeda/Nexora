@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src/nucleo",
+    "outDir": "pacote/dist",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": false,
+    "noEmit": false
+  },
+  "include": ["src/nucleo/**/*.ts"],
+  "exclude": ["**/*.test.ts"]
+}

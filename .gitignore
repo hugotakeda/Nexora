@@ -4,3 +4,12 @@ dist/
 *.log
 .DS_Store
 Thumbs.db
+
+# Artefatos de empacotamento
+build/
+pacote/dist/
+*.blob
+*.tgz
+
+# Distribuição gerada
+distribuicao/

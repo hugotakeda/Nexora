@@ -1,6 +1,13 @@
-import { Empresa, LinhaProduto } from '../dominio/Empresa';
-import { FEATURES_OBRIGATORIAS, PRODUTOS } from './LinhaProduto';
+import {
+  FEATURES_OBRIGATORIAS,
+  PRODUTOS,
+  NomeLinhaProduto,
+} from "./LinhaProduto";
 
+interface EmpresaConfiguravel {
+  getId(): string;
+  getLinhaProduto(): NomeLinhaProduto;
+}
 /**
  * SINGLETON — Exemplo 2: Registro central de features (feature toggles).
  *
@@ -19,19 +26,29 @@ import { FEATURES_OBRIGATORIAS, PRODUTOS } from './LinhaProduto';
 export class RegistroFeatures {
   private static instancia: RegistroFeatures | null = null;
 
-  private static readonly COMPORTAMENTOS_POR_LINHA: Record<LinhaProduto, string[]> = {
+  private static readonly COMPORTAMENTOS_POR_LINHA: Record<
+    NomeLinhaProduto,
+    string[]
+  > = {
     CORE: [],
-    TECH: ['controle-garantia', 'laudo-tecnico'],
-    MAINT: ['manutencao-preventiva', 'contratos-recorrentes'],
-    FIELD: ['controle-garantia', 'assinatura-digital', 'rastreamento-gps', 'app-offline',
-      'manutencao-preventiva'],
+    TECH: ["controle-garantia", "laudo-tecnico"],
+    MAINT: ["manutencao-preventiva", "contratos-recorrentes"],
+    FIELD: [
+      "controle-garantia",
+      "assinatura-digital",
+      "rastreamento-gps",
+      "app-offline",
+      "manutencao-preventiva",
+    ],
   };
 
   private readonly featuresPorEmpresa: Map<string, Set<string>>;
 
   private constructor() {
     this.featuresPorEmpresa = new Map();
-    console.log('[RegistroFeatures] >>> Instância criada (esta mensagem deve aparecer UMA vez)');
+    console.log(
+      "[RegistroFeatures] >>> Instância criada (esta mensagem deve aparecer UMA vez)",
+    );
   }
 
   public static getInstance(): RegistroFeatures {
@@ -42,7 +59,7 @@ export class RegistroFeatures {
   }
 
   /** Carrega núcleo + módulos opcionais do produto + comportamentos do produto. */
-  public aplicarLinhaProduto(empresa: Empresa): void {
+  public aplicarLinhaProduto(empresa: EmpresaConfiguravel): void {
     const linha = empresa.getLinhaProduto();
     const features = new Set<string>([
       ...FEATURES_OBRIGATORIAS,

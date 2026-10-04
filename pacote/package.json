@@ -1,0 +1,37 @@
+{
+  "name": "@nexora/nucleo",
+  "version": "2.0.0",
+  "description": "Componentes reutilizáveis do núcleo do NEXORA: CRUD genérico, validação, persistência e variabilidade da linha de produto.",
+  "license": "MIT",
+  "author": "Equipe NEXORA — PUCPR",
+  "keywords": [
+    "erp",
+    "typescript",
+    "reuso",
+    "lps",
+    "crud",
+    "variabilidade"
+  ],
+  "main": "./dist/indice.js",
+  "types": "./dist/indice.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/indice.d.ts",
+      "require": "./dist/indice.js",
+      "default": "./dist/indice.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "mysql2": "^3.24.4"
+  }
+}
